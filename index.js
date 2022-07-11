@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const multer = require('multer');
 const path = require('path');
-
+const fs = require('fs')
 const app = express();
 app.use(express.json());
 
@@ -141,19 +141,28 @@ const upload = multer({
     storage: storage
 })
 // Upload Image
-app.post("/upload", upload.single('img'),(req, res) => {
+app.post("/upload", upload.single('img'), (req, res) => {
     const img = req.file.filename;
     const id = req.body.id;
     try {
-        connection.query("UPDATE tb_users SET img_user = ? WHERE id = ?", [img,id], (err,results) => {
+        connection.query("SELECT img_user FROM tb_users WHERE id = ?", [id], (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
-            } else {
-                return res.status(200).json("upload Success");
-            }
+            } 
+                var filePath = `./images/${results[0]['img_user']}`;
+                if(results[0]['img_user'] != ""){
+                    fs.unlinkSync(filePath);
+                }         
+                connection.query("UPDATE tb_users SET img_user = ? WHERE id = ?", [img, id], (err, results) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(400).send();
+                    } else {
+                        return res.status(200).json("upload Success");
+                    }
+                })
         })
-
     } catch (err) {
         console.log(err);
         return res.status(500).send();
