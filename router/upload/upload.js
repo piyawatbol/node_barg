@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
 
 
 const storage = multer.diskStorage({
-    destination: './images',
+    destination: './images/users',
     filename: (req, file, cb) => {
         return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
     }
