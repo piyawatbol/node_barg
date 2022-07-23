@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 
 router.post("/", async (req, res) => {
    
-    const { first_name, last_name, user_name, password, email, user_image, status_id,address_id } = req.body;
+    const { first_name, last_name, user_name, password, email, user_image, status_id} = req.body;
     const phone = "";
     
     if(first_name == ""){
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
                     if (numRows == 1) {
                         return res.status(200).json("duplicate email");
                     } else {
-                        connection.query("INSERT INTO user(first_name,last_name,user_name,password,email,phone,user_image,status_id,address_id) VALUES(?,?,?,?,?,?,?,?,?)", [first_name, last_name, user_name, password, email,phone, user_image, status_id,address_id], (err, results, fields) => {
+                        connection.query("INSERT INTO user(first_name,last_name,user_name,password,email,phone,user_image,status_id) VALUES(?,?,?,?,?,?,?,?)", [first_name, last_name, user_name, password, email,phone, user_image, status_id], (err, results, fields) => {
                             if (err) {
                                 console.log(err);
                                 return res.status(400).send();
