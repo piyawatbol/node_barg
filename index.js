@@ -32,13 +32,19 @@ app.use('/login', require("./router/login/login"));
 app.use('/register', require("./router/register/register"));
 app.use('/get_id', require("./router/get_id/get_id"));
 app.use('/edit_user', require("./router/edit_user/edit_user"));
-app.use('/upload', require("./router/upload/upload.js"));
+app.use('/edit_img_user', require("./router/edit_img/edit_img_user.js"));
 app.use('/email',require("./router/email/email"));
 app.use('/checkOtp',require("./router/email/checkOtp"))
 app.use('/reset',require("./router/email/reset"));
 //Store
 app.use('/get_menu',require("./router/menu/get_menu"))
 app.use('/add_menu',require("./router/menu/add_menu"))
+app.use('/edit_menu',require("./router/menu/edit_menu"))
+app.use('/edit_img_food',require("./router/edit_img/edit_img_food"))
+app.use('/delete_menu',require("./router/menu/delete_menu"))
+app.use('/get_store',require("./router/get_store/get_store"))
+
+
 
 
 

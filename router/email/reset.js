@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 router.post("/", async (req, res) => {
     const email = req.body.email;
     const Newpassword = req.body.Newpassword;
-    const otp = "0";
+    const otp = "";
     connection.query("UPDATE user SET password = ?,otp = ? WHERE email = ?", [Newpassword,otp,email], (err, results,) => {
         if (err) {
             console.log(err);

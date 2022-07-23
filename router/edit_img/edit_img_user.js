@@ -13,7 +13,6 @@ const connection = mysql.createConnection({
     database: 'bargfood'
 });
 
-
 const storage = multer.diskStorage({
     destination: './images/users',
     filename: (req, file, cb) => {
@@ -34,7 +33,7 @@ router.post("/", upload.single('img'), (req, res) => {
                 console.log(err);
                 return res.status(400).send();
             } 
-                var filePath = `./images/${results[0]['user_image']}`;
+                var filePath = `./images/users/${results[0]['user_image']}`;
                 if(results[0]['user_image'] != ""){
                     fs.unlinkSync(filePath);
                 }         

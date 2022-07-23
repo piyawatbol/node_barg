@@ -18,8 +18,8 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-
 router.post("/", async (req, res) => {
+    const empty = "";
     const email = req.body.email;
     function getRandom(max) {
         return Math.floor(Math.random() * max);
@@ -43,21 +43,22 @@ router.post("/", async (req, res) => {
                         form: 'pywsddbol2@gmail.com',
                         to: `${email}`,
                         subject: `OTP : ${otp}`
-
                     };
                     transporter.sendMail(mailOptions, function (err, info) {
                         if (err) {
                             console.log(err)
+                        } else {
+                            setTimeout(() => {
+                                connection.query("UPDATE user SET otp = ? WHERE email = ?", [empty, email], (err, results,) => {
+                                })
+                                console.log("reset otp")
+                            }, 60000)
+                            return res.status(200).json("send email success")
                         }
-                        return res.status(200).json("send email success");
                     });
                 }
-
             })
         }
     })
 })
-
-
-
 module.exports = router;
