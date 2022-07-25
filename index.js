@@ -44,6 +44,10 @@ app.use('/edit_img_food',require("./router/edit_img/edit_img_food"))
 app.use('/delete_menu',require("./router/menu/delete_menu"))
 app.use('/get_store',require("./router/get_store/get_store"))
 app.use('/add_store',require("./router/get_store/add_store"))
+app.use('/edit_img_store',require("./router/edit_img/edit_img_store"))
+app.use('/edit_store',require("./router/get_store/edit_store"))
+
+
 
 
 

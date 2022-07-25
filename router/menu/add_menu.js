@@ -25,14 +25,13 @@ const upload = multer({
 
 router.post("/",upload.single('img'),(req, res) => {
     const store_id = req.body.store_id;
-    const status_id = 1;
     const food_name = req.body.food_name;
     const price = req.body.price;
     const detail = req.body.detail;
     const img = req.file.filename;
     
     try {
-        connection.query("INSERT INTO food(store_id,status_id,food_name,price,detail,food_image) VALUES(?,?,?,?,?,?)", [store_id,status_id,food_name,price,detail,img], (err, results, fields) => {
+        connection.query("INSERT INTO food(store_id,food_name,price,detail,food_image) VALUES(?,?,?,?,?)", [store_id,food_name,price,detail,img], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
