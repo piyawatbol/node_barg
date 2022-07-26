@@ -18,6 +18,8 @@ router.post("/", async (req, res) => {
                 return res.status(400).send();
             }
             otp = results[0]['otp'];
+            console.log(otp)
+            console.log(checkOtp)
             if(otp == checkOtp){
                 return res.status(200).json("Correct")
             }else{

@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 });
 
 router.post("/", async (req, res) => {
-    const empty = "";
+    const empty = "empty";
     const email = req.body.email;
     function getRandom(max) {
         return Math.floor(Math.random() * max);
