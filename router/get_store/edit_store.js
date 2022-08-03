@@ -10,6 +10,7 @@ const connection = mysql.createConnection({
 });
 
 router.patch("/:store_id", async (req, res) => {
+    const store_id = req.params.store_id;
     const store_name = req.body.store_name;
     const store_house_number = req.body.store_house_number;
     const store_county = req.body.store_county;
@@ -18,7 +19,7 @@ router.patch("/:store_id", async (req, res) => {
     const store_zipcode = req.body.store_zipcode;
 
     try {
-        connection.query("UPDATE store SET store_name = ? , store_house_number = ? , store_county = ?,store_district = ?,store_province = ?, store_zipcode = ?", [store_name,store_house_number,store_county,store_district,store_province,store_zipcode], (err, results, fields) => {
+        connection.query("UPDATE store SET store_name = ? , store_house_number = ? , store_county = ?,store_district = ?,store_province = ?, store_zipcode = ? WHERE store_id = ?", [store_name,store_house_number,store_county,store_district,store_province,store_zipcode,store_id], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();

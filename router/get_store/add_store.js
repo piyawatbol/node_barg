@@ -29,6 +29,12 @@ router.post("/:user_id",upload.single('img'), (req, res) => {
      const store_latitude = "";
      const store_image = req.file.filename;
     const { store_name,store_house_number,store_county,store_district,store_province,store_zipcode} = req.body
+
+    if(store_name == ""){
+        return res.status(200).json("store name null");
+    }
+
+
     try {
         connection.query("INSERT INTO store(store_name,store_image,user_id,store_house_number,store_county,store_district,store_province,store_zipcode,store_latitude,store_longtitude) VALUES(?,?,?,?,?,?,?,?,?,?)", [store_name,store_image,user_id,store_house_number,store_county,store_district,store_province,store_zipcode,store_latitude,store_longtitude], (err, results, fields) => {
              if (err) {
