@@ -8,21 +8,20 @@ const connection = mysql.createConnection({
     password: '',
     database: 'bargfood'
 });
-router.post("/", async (req, res) => {
-    const email = req.body.email;
+router.post("/:user_id", async (req, res) => {
+    const user_id = req.params.user_id;
     const checkOtp = req.body.checkOtp;
     const empty = "empty";
     try {
-        connection.query("SELECT otp FROM user WHERE email = ?", [email], (err, results, fields) => {
+        connection.query("SELECT otp FROM user WHERE user_id = ?", [user_id], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
             }
             otp = results[0]['otp'];
-            console.log(`otp : ${otp}`)
-            console.log(`check : ${checkOtp}`)
+            console.log(`otp : ${otp} check : ${checkOtp} `)
             if (otp == checkOtp) {
-                connection.query("UPDATE user SET otp = ? WHERE email = ?", [empty, email], (err, results, fields) => {
+                connection.query("UPDATE user SET otp = ? WHERE user_id = ?", [empty, user_id], (err, results, fields) => {
                     if (err) {
                         console.log(err);
                         return res.status(400).send();
@@ -39,5 +38,5 @@ router.post("/", async (req, res) => {
         return res.status(500).send();
     }
 })
+module.exports = router
 
-module.exports = router;

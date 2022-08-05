@@ -10,13 +10,11 @@ const connection = mysql.createConnection({
     database: 'bargfood'
 });
 
-router.patch("/:user_id", async (req, res) => {
+router.post("/:user_id", async (req, res) => {
     const user_id = req.params.user_id;
-    const first_name = req.body.first_name;
-    const last_name = req.body.last_name;
-  
+    const email = req.body.email;
     try {
-        connection.query("UPDATE user SET first_name = ? ,last_name = ?  WHERE user_id = ?", [first_name, last_name, user_id], (err, results, fields) => {
+        connection.query("UPDATE user SET email = ? WHERE user_id = ?", [email,user_id], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();

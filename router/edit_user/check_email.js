@@ -10,24 +10,25 @@ const connection = mysql.createConnection({
     database: 'bargfood'
 });
 
-router.patch("/:user_id", async (req, res) => {
-    const user_id = req.params.user_id;
-    const first_name = req.body.first_name;
-    const last_name = req.body.last_name;
-  
+router.post("/", async (req, res) => {
+
+    const newemail = req.body.email;
     try {
-        connection.query("UPDATE user SET first_name = ? ,last_name = ?  WHERE user_id = ?", [first_name, last_name, user_id], (err, results, fields) => {
+        connection.query("SELECT email FROM user WHERE email = ?", [newemail], (err, results,) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
             }
-            res.status(200).json("update success");
+            numRows = results.length;
+            if (numRows == 1) {
+                return res.status(200).json("duplicate email");
+            }
+            return res.status(200).json("not duplicate");
         })
     } catch (err) {
         console.log(err);
         return res.status(500).send();
     }
 })
-
 
 module.exports = router;

@@ -47,7 +47,12 @@ app.use('/add_store',require("./router/get_store/add_store"))
 app.use('/edit_img_store',require("./router/edit_img/edit_img_store"))
 app.use('/edit_store',require("./router/get_store/edit_store"))
 app.use('/accept_email',require("./router/register/accept_email"))
-
+app.use('/check_password',require("./router/edit_user/check_password"))
+app.use('/check_email',require("./router/edit_user/check_email"))
+app.use('/change_email',require("./router/edit_user/change_email"))
+app.use('/send_email',require("./router/edit_user/send_email"))
+app.use('/check_otp',require("./router/edit_user/check_otp"))
+app.use('/check_phone',require("./router/edit_user/check_phone"))
 
 
 
