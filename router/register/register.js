@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
         return res.status(200).json("password 6");
     }
     try {
-        connection.query("SELECT user_name FROM user WHERE user_name = ?", [user_name], (err, results,) => {
+        connection.query("SELECT * FROM user WHERE user_name = ? AND status_id = ?", [user_name,status_id], (err, results,) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
             if (numRows == 1) {
                 return res.status(200).json("duplicate username");
             } else {
-                connection.query("SELECT email FROM user WHERE email = ?", [email], (err, results,) => {
+                connection.query("SELECT * FROM user WHERE email = ? AND status_id = ?", [email], (err, results,) => {
                     if (err) {
                         console.log(err);
                         return res.status(400).send();
@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
                     if (numRows == 1) {
                         return res.status(200).json("duplicate email");
                     } else {
-                        connection.query("SELECT phone FROM user WHERE phone = ?", [phone], (err, results,) => {
+                        connection.query("SELECT phone FROM user WHERE phone = ? AND status_id = ?", [phone], (err, results,) => {
                             if (err) {
                                 console.log(err);
                                 return res.status(400).send();

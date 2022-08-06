@@ -11,9 +11,9 @@ const connection = mysql.createConnection({
 });
 
 router.post("/", async (req, res) => {
-    const { user_name, password } = req.body;
+    const { user_name, password ,status_id} = req.body;
     try {
-        connection.query("SELECT * FROM user WHERE user_name = ? && password = ?", [user_name, password], (err, results, fields) => {
+        connection.query("SELECT * FROM user WHERE user_name = ? && password = ? && status_id = ?", [user_name, password,status_id], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
