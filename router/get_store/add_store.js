@@ -36,7 +36,7 @@ router.post("/:user_id",upload.single('img'), (req, res) => {
 
 
     try {
-        connection.query("INSERT INTO store(store_name,store_image,user_id,store_house_number,store_county,store_district,store_province,store_zipcode,store_latitude,store_longtitude) VALUES(?,?,?,?,?,?,?,?,?,?)", [store_name,store_image,user_id,store_house_number,store_county,store_district,store_province,store_zipcode,store_latitude,store_longtitude], (err, results, fields) => {
+        connection.query("INSERT INTO store(store_name,store_image,user_id,store_house_number,store_county,store_district,store_province,store_zipcode,store_lat,store_long) VALUES(?,?,?,?,?,?,?,?,?,?)", [store_name,store_image,user_id,store_house_number,store_county,store_district,store_province,store_zipcode,store_latitude,store_longtitude], (err, results, fields) => {
              if (err) {
                  console.log(err);
                 return res.status(400).send();

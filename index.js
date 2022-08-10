@@ -53,7 +53,7 @@ app.use('/change_email',require("./router/edit_user/change_email"))
 app.use('/send_email',require("./router/edit_user/send_email"))
 app.use('/check_otp',require("./router/edit_user/check_otp"))
 app.use('/check_phone',require("./router/edit_user/check_phone"))
-
+app.use('/update_location',require("./router/get_store/update_location"))
 
 
 
