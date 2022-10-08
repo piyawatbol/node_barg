@@ -14,7 +14,7 @@ router.patch("/:store_id", async (req, res) => {
     const store_lat = req.body.store_lat;
     const store_long= req.body.store_long;
     try {
-        connection.query("UPDATE store SET store_lat = ? , store_long = ?  WHERE store_id = ?", [store_lat,store_long,store_id], (err, results, fields) => {
+        connection.query("UPDATE tb_store SET store_lat = ? , store_long = ?  WHERE store_id = ?", [store_lat,store_long,store_id], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();

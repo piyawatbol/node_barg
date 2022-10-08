@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 router.delete("/:food_id", async (req, res) => {
     const food_id = req.params.food_id;
     try {
-        connection.query("SELECT food_image FROM food WHERE food_id = ?", [food_id], (err, results) => {
+        connection.query("SELECT food_image FROM tb_food WHERE food_id = ?", [food_id], (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
@@ -22,7 +22,7 @@ router.delete("/:food_id", async (req, res) => {
             if (results[0]['food_image'] != "") {
                 fs.unlinkSync(filePath);
             }
-            connection.query("DELETE FROM food WHERE food_id = ?", [food_id], (err, results, fields) => {
+            connection.query("DELETE FROM tb_food WHERE food_id = ?", [food_id], (err, results, fields) => {
                 if (err) {
                     console.log(err);
                     return res.status(400).send();

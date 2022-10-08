@@ -42,7 +42,7 @@ router.get("/single/:user_id/:store_id", async (req, res) => {
 
   try {
     connection.query(
-      "SELECT * FROM store WHERE user_id = ? AND store_id = ?",
+      "SELECT * FROM tb_store WHERE user_id = ? AND store_id = ?",
       [user_id, store_id],
       (err, results, fields) => {
         if (err) {

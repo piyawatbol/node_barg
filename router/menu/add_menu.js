@@ -29,9 +29,10 @@ router.post("/",upload.single('img'),(req, res) => {
     const price = req.body.price;
     const detail = req.body.detail;
     const img = req.file.filename;
+    const food_status = 1;
     
     try {
-        connection.query("INSERT INTO food(store_id,food_name,price,detail,food_image) VALUES(?,?,?,?,?)", [store_id,food_name,price,detail,img], (err, results, fields) => {
+        connection.query("INSERT INTO tb_food(store_id,food_name,price,detail,food_image,food_status) VALUES(?,?,?,?,?,?)", [store_id,food_name,price,detail,img,food_status], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
