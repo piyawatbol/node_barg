@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 08, 2022 at 02:25 PM
+-- Generation Time: Nov 02, 2022 at 04:11 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.29
 
@@ -191,7 +191,7 @@ CREATE TABLE `tb_store` (
 --
 
 INSERT INTO `tb_store` (`store_id`, `store_name`, `store_image`, `user_id`, `store_house_number`, `store_county`, `store_district`, `store_province`, `store_zipcode`, `store_lat`, `store_long`) VALUES
-(1, 'ร้านก๋วยเตี๋ยว', 'img_1665154529828.jpg', 1, '555/4', 'บางกระปิ', 'คลองจั่น', 'กรุงเทพมหานคร', '10240', '', '');
+(1, 'ร้านก๋วยเตี๋ยว', 'img_1665154529828.jpg', 1, '555/4', 'บางกระปิ', 'คลองจั่น', 'กรุงเทพมหานคร', '10240', '13.782034218027821', '100.63553541898727');
 
 -- --------------------------------------------------------
 
@@ -216,7 +216,8 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`user_id`, `user_name`, `pass_word`, `first_name`, `last_name`, `email`, `phone`, `user_image`, `status_id`) VALUES
-(1, 'piya', '123456', 'piyawat', 'sakdadet', 'piyawatbol@gmail.com', '0999999', 'img_1665154433457.jpg', 2);
+(1, 'piya', '123456', 'piyawat', 'sakdadet', 'piyawatbol2@gmail.com', '09999999', 'img_1665154433457.jpg', 2),
+(2, 'rider1', '123456', 'rider1', 'rider1', 'piyawatbol2@gmail.com', '09999999', 'img_1666425650987.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -352,7 +353,7 @@ ALTER TABLE `tb_order_status`
 -- AUTO_INCREMENT for table `tb_otp_email`
 --
 ALTER TABLE `tb_otp_email`
-  MODIFY `send_otp_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `send_otp_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `tb_solve_report`
@@ -370,7 +371,7 @@ ALTER TABLE `tb_store`
 -- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_user_status`

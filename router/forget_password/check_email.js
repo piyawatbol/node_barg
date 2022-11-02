@@ -11,9 +11,9 @@ const connection = mysql.createConnection({
 });
 
 router.post("/", async (req, res) => {
-    const { email } = req.body;
+    const { email,status_id } = req.body;
     try {
-        connection.query("SELECT email FROM tb_users WHERE email = ? ", [email], (err, results, fields) => {
+        connection.query("SELECT email FROM tb_users WHERE email = ? AND status_id = ?", [email,status_id], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();

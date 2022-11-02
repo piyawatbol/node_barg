@@ -12,7 +12,8 @@ const connection = mysql.createConnection({
 router.post("/", async (req, res) => {
     const email = req.body.email;
     const pass_word = req.body.pass_word;
-    connection.query("UPDATE tb_users SET pass_word = ? WHERE email = ?", [pass_word,email], (err, results,) => {
+    const status_id = req.body.status_id;
+    connection.query("UPDATE tb_users SET pass_word = ? WHERE email = ? AND status_id = ?", [pass_word,email,status_id], (err, results,) => {
         if (err) {
             console.log(err);
             return res.status(400).send();

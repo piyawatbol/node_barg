@@ -10,11 +10,11 @@ const connection = mysql.createConnection({
 });
 
 router.post("/", async (req, res) => {
-  const { user_name, email, phone } = req.body;
+  const { user_name, email, phone , status_id } = req.body;
   try {
     connection.query(
-      "SELECT user_name FROM tb_users WHERE user_name = ?",
-      [user_name],
+      "SELECT user_name FROM tb_users WHERE user_name = ? AND status_id = ?",
+      [user_name,status_id],
       (err, results, fields) => {
         if (err) {
           console.log(err);
@@ -25,8 +25,8 @@ router.post("/", async (req, res) => {
           return res.status(200).json("duplicate username");
         } else {
           connection.query(
-            "SELECT email FROM tb_users WHERE email = ?",
-            [email],
+            "SELECT email FROM tb_users WHERE email = ? AND status_id = ?",
+            [email,status_id],
             (err, results, fields) => {
               if (err) {
                 console.log(err);
@@ -37,8 +37,8 @@ router.post("/", async (req, res) => {
                 return res.status(200).json("duplicate email");
               } else {
                 connection.query(
-                  "SELECT phone FROM tb_users WHERE phone = ?",
-                  [phone],
+                  "SELECT phone FROM tb_users WHERE phone = ? AND status_id = ?",
+                  [phone,status_id],
                   (err, results, fields) => {
                     if (err) {
                       console.log(err);
