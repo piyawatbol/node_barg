@@ -1,8 +1,18 @@
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
+
+
+const bodyParser = require('body-parser')
+const _ = require('lodash')
+const cors = require('cors');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(cors())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded( { extended: true }))
 
 const port = 3000;
 app.listen(port, () => {
@@ -38,6 +48,7 @@ app.use('/check_otp',require("./router/forget_password/check_otp"));
 app.use('/reset_password',require("./router/forget_password/reset_password"));
 
 //store
+app.use('/get_all_store',require("./router/store/get_all_store"));
 app.use('/get_store',require("./router/store/get_store"));
 app.use('/add_store',require("./router/store/add_store"));
 app.use('/get_store',require("./router/store/get_store"));
@@ -60,6 +71,15 @@ app.use('/add_menu',require("./router/menu/add_menu"))
 app.use('/edit_menu',require("./router/menu/edit_menu"))
 app.use('/edit_img_food',require("./router/menu/edit_img_food"))
 app.use('/delete_menu',require("./router/menu/delete_menu"))
+
+//qrcode
+app.use('/qrcode',require("./router/qrcode/qrcode"))
+
+//request
+app.use('/add_request',require("./router/request/add_request"))
+app.use('/add_order',require('./router/request/add_order'))
+
+
 
 
 
