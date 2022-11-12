@@ -67,6 +67,7 @@ app.use('/change_phone',require("./router/user/change_phone"));
 
 //food
 app.use('/get_menu',require("./router/menu/get_menu"))
+app.use('/get_menu_user',require("./router/menu/get_menu_user"))
 app.use('/add_menu',require("./router/menu/add_menu"))
 app.use('/edit_menu',require("./router/menu/edit_menu"))
 app.use('/edit_img_food',require("./router/menu/edit_img_food"))
@@ -77,7 +78,18 @@ app.use('/qrcode',require("./router/qrcode/qrcode"))
 
 //request
 app.use('/add_request',require("./router/request/add_request"))
+app.use('/get_request',require("./router/request/get_request"))
+app.use('/get_request_rider',require("./router/request/get_request_rider"))
+app.use('/update_request',require("./router/request/update_request"))
+app.use('/update_request_rider',require("./router/request/update_request_rider"))
+
+
+//order
 app.use('/add_order',require('./router/request/add_order'))
+app.use('/get_order',require("./router/request/get_order"))
+
+
+
 
 
 

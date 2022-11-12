@@ -26,6 +26,12 @@ const upload = multer({
 });
 
 router.post("/", upload.single("img"), (req, res) => {
+  var currentdate = new Date();
+  var date = `${currentdate.getDate()}/${currentdate.getMonth() + 1}/${currentdate.getFullYear()}`;
+  // console.log(date);
+  var time = `${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`;
+  // console.log(time);
+
   const user_id = req.body.user_id;
   const rider_id = "";
   const store_id = req.body.store_id;
@@ -39,8 +45,8 @@ router.post("/", upload.single("img"), (req, res) => {
 
   try {
     connection.query(
-      "INSERT INTO tb_request(user_id,rider_id,store_id,order_id,user_lati,user_longti,rider_lati,rider_longti,slip_img,status) VALUES(?,?,?,?,?,?,?,?,?,?)",
-      [user_id,rider_id,store_id,order_id,user_lati,user_longti,rider_lati,rider_longti,img,status],
+      "INSERT INTO tb_request(user_id,rider_id,store_id,order_id,user_lati,user_longti,rider_lati,rider_longti,slip_img,status,date,time) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+      [user_id,rider_id,store_id,order_id,user_lati,user_longti,rider_lati,rider_longti,img,status,date,time],
       (err, results, fields) => {
         if (err) {
           console.log(err);
