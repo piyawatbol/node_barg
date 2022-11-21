@@ -77,9 +77,11 @@ app.use('/delete_menu',require("./router/menu/delete_menu"))
 app.use('/qrcode',require("./router/qrcode/qrcode"))
 
 //request
+app.use('/add_request_img',require("./router/request/add_request_img"))
 app.use('/add_request',require("./router/request/add_request"))
 app.use('/get_request',require("./router/request/get_request"))
-app.use('/get_request_rider',require("./router/request/get_request_rider"))
+app.use('/get_request_single',require("./router/request/get_request_single"))
+app.use('/get_request_history',require("./router/request/get_request_history"))
 app.use('/update_request',require("./router/request/update_request"))
 app.use('/update_request_rider',require("./router/request/update_request_rider"))
 
@@ -88,6 +90,10 @@ app.use('/update_request_rider',require("./router/request/update_request_rider")
 app.use('/add_order',require('./router/request/add_order'))
 app.use('/get_order',require("./router/request/get_order"))
 
+//rider
+app.use('/get_request_rider',require("./router/request/get_request_rider"))
+app.use('/get_request_recived',require("./router/request/get_request_recived"))
+app.use('/get_request_one',require("./router/request/get_request_one"))
 
 
 

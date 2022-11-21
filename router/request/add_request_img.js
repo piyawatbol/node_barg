@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const mysql = require("mysql");
+const multer = require("multer");
+const path = require("path");
+
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -9,7 +12,21 @@ const connection = mysql.createConnection({
   database: "bargfood",
 });
 
-router.post("/", (req, res) => {
+const storage = multer.diskStorage({
+  destination: "./images/slip",
+  filename: (req, file, cb) => {
+    return cb(
+      null,
+      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
+    );
+  },
+});
+
+const upload = multer({
+  storage: storage,
+});
+
+router.post("/", upload.single("img"), (req, res) => {
   var currentdate = new Date();
   const date = `${currentdate.getDate()}/${currentdate.getMonth() + 1}/${currentdate.getFullYear()}`;
   const time = `${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`;
@@ -21,7 +38,7 @@ router.post("/", (req, res) => {
   const order_id = req.body.order_id;
   const rider_lati = "";
   const rider_longti = "";
-  const img = '';
+  const img = req.file.filename;
   const status = req.body.status;
   
   try {
