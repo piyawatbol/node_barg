@@ -84,6 +84,8 @@ app.use('/get_request_single',require("./router/request/get_request_single"))
 app.use('/get_request_history',require("./router/request/get_request_history"))
 app.use('/update_request',require("./router/request/update_request"))
 app.use('/update_request_rider',require("./router/request/update_request_rider"))
+app.use('/request_success',require("./router/request/request_success"))
+
 
 
 //order

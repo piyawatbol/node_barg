@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 const storage = multer.diskStorage({
-  destination: "./images/slip",
+  destination: "./images/success",
   filename: (req, file, cb) => {
     return cb(
       null,
@@ -27,24 +27,12 @@ const upload = multer({
 });
 
 router.post("/", upload.single("img"), (req, res) => {
-  var currentdate = new Date();
-  const date = `${currentdate.getDate()}/${currentdate.getMonth() + 1}/${currentdate.getFullYear()}`;
-  const time = `${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`;
-  
-  const user_id = req.body.user_id;
-  const address_id = req.body.address_id;
-  const rider_id = "";
-  const store_id = req.body.store_id;
-  const order_id = req.body.order_id;
-  const rider_lati = "";
-  const rider_longti = "";
+  const request_id = req.body.request_id;
   const img = req.file.filename;
-  const status = req.body.status;
-  
   try {
     connection.query(
-      "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,slip_img,status,date,time) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-      [user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,img,status,date,time],
+      "INSERT INTO tb_request_success(request_id,success_img) VALUES(?,?)",
+      [request_id,img],
       (err, results, fields) => {
         if (err) {
           console.log(err);
