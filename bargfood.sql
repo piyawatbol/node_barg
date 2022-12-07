@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 21, 2022 at 09:39 AM
+-- Generation Time: Dec 07, 2022 at 05:38 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.29
 
@@ -128,13 +128,12 @@ CREATE TABLE `tb_order` (
 --
 
 INSERT INTO `tb_order` (`id`, `order_id`, `food_id`, `food_name`, `amount`, `price`, `detail`) VALUES
-(1, '20221118232821', '6', 'ก๋วยจั๊บ', '2', '100', ''),
-(2, '20221118232821', '5', 'บะหมี่', '3', '150', ''),
-(3, '20221118232827', '6', 'ก๋วยจั๊บ', '2', '100', ''),
-(4, '20221118232827', '5', 'บะหมี่', '3', '150', ''),
-(5, '20221118232827', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '1', '40', ''),
-(6, '2022111901716', '6', 'ก๋วยจั๊บ', '3', '150', ''),
-(7, '20221121104925', '2', 'ก๋วยเตี๋ยวเส้นเล็กหมูน้ำตก', '2', '80', 'ไม่เอาผัก');
+(26, '2022127104638', '5', 'บะหมี่', '2', '100', ''),
+(27, '2022127104638', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '2', '80', ''),
+(28, '2022127104638', '6', 'ก๋วยจั๊บ', '3', '150', ''),
+(29, '2022127225614', '5', 'บะหมี่', '2', '100', ''),
+(30, '2022127225614', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '2', '80', ''),
+(31, '2022127225614', '6', 'ก๋วยจั๊บ', '3', '150', '');
 
 -- --------------------------------------------------------
 
@@ -198,10 +197,29 @@ CREATE TABLE `tb_request` (
 --
 
 INSERT INTO `tb_request` (`request_id`, `user_id`, `address_id`, `rider_id`, `store_id`, `order_id`, `rider_lati`, `rider_longti`, `slip_img`, `status`, `date`, `time`) VALUES
-(1, '1', 1, '3', '1', '20221118232821', '13.7821', '100.6355', 'img_1668788901804.jpg', '6', '18/11/2022', '23:28:21'),
-(2, '1', 1, '3', '1', '20221118232827', '13.7821', '100.6355', '', '6', '18/11/2022', '23:28:27'),
-(3, '1', 1, '3', '1', '2022111901716', '13.782061859136165', '100.63558393373458', '', '6', '19/11/2022', '0:17:17'),
-(4, '1', 1, '3', '1', '20221121104925', '13.7821', '100.6355', '', '6', '21/11/2022', '10:49:25');
+(12, '1', 1, '3', '1', '2022127104638', '13.7914', '100.62751', 'img_1670384798329.jpg', '7', '7/12/2022', '10:46:38'),
+(13, '1', 1, '', '1', '2022127225614', '', '', 'img_1670428574982.jpg', '3', '7/12/2022', '22:56:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_request_success`
+--
+
+CREATE TABLE `tb_request_success` (
+  `success_id` int(10) NOT NULL,
+  `request_id` varchar(255) NOT NULL,
+  `success_img` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_request_success`
+--
+
+INSERT INTO `tb_request_success` (`success_id`, `request_id`, `success_img`) VALUES
+(5, '7', 'img_1670327782174.jpg'),
+(6, '8', 'img_1670344712008.jpg'),
+(7, '12', 'img_1670385447611.jpg');
 
 -- --------------------------------------------------------
 
@@ -266,7 +284,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`user_id`, `user_name`, `pass_word`, `first_name`, `last_name`, `email`, `phone`, `user_image`, `status_id`) VALUES
-(1, 'user1', '123456', 'user1', 'user1', 'user1@gmail.com', '09999', '', 1),
+(1, 'user1', '123456', 'user1', 'user1', 'user1@gmail.com', '09999', 'img_1670415808870.jpg', 1),
 (2, 'store1', '123456', 'store1', 'store1', 'store1@gmail.com', '09999999', 'img_1665154433457.jpg', 2),
 (3, 'rider1', '123456', 'rider1', 'rider1', 'rider1@gmail.com', '09999999', 'img_1668330407591.jpg', 3);
 
@@ -337,6 +355,12 @@ ALTER TABLE `tb_request`
   ADD PRIMARY KEY (`request_id`);
 
 --
+-- Indexes for table `tb_request_success`
+--
+ALTER TABLE `tb_request_success`
+  ADD PRIMARY KEY (`success_id`);
+
+--
 -- Indexes for table `tb_solve_report`
 --
 ALTER TABLE `tb_solve_report`
@@ -386,7 +410,7 @@ ALTER TABLE `tb_food`
 -- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tb_order_status`
@@ -398,13 +422,19 @@ ALTER TABLE `tb_order_status`
 -- AUTO_INCREMENT for table `tb_otp_email`
 --
 ALTER TABLE `tb_otp_email`
-  MODIFY `send_otp_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `send_otp_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `tb_request`
 --
 ALTER TABLE `tb_request`
-  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tb_request_success`
+--
+ALTER TABLE `tb_request_success`
+  MODIFY `success_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_solve_report`
