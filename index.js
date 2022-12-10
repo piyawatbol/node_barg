@@ -86,11 +86,14 @@ app.use('/update_request',require("./router/request/update_request"))
 app.use('/update_request_rider',require("./router/request/update_request_rider"))
 app.use('/request_success',require("./router/request/request_success"))
 
-
-
 //order
 app.use('/add_order',require('./router/request/add_order'))
 app.use('/get_order',require("./router/request/get_order"))
+
+//cart
+app.use('/add_cart',require("./router/cart/add_cart"))
+app.use('/get_cart',require("./router/cart/get_cart"))
+
 
 //rider
 app.use('/get_request_rider',require("./router/request/get_request_rider"))

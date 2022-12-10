@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2022 at 05:38 PM
+-- Generation Time: Dec 10, 2022 at 07:14 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.29
 
@@ -78,8 +78,22 @@ CREATE TABLE `tb_cart` (
   `cart_id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `store_id` int(10) NOT NULL,
-  `food_list` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`food_list`))
+  `food_id` int(10) NOT NULL,
+  `food_name` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `price` varchar(255) NOT NULL,
+  `detail` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_cart`
+--
+
+INSERT INTO `tb_cart` (`cart_id`, `user_id`, `store_id`, `food_id`, `food_name`, `amount`, `price`, `detail`) VALUES
+(7, 1, 1, 2, 'ก๋วยเตี๋ยวเส้นเล็กหมูน้ำตก', '3', '120', 'ไม่เอาลูกชิ้น'),
+(8, 1, 1, 6, 'ก๋วยจั๊บ', '1', '50', 'ไม่เอาเลือด'),
+(9, 1, 1, 5, 'บะหมี่', '1', '50', ''),
+(10, 1, 1, 3, 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '3', '120', '');
 
 -- --------------------------------------------------------
 
@@ -128,12 +142,24 @@ CREATE TABLE `tb_order` (
 --
 
 INSERT INTO `tb_order` (`id`, `order_id`, `food_id`, `food_name`, `amount`, `price`, `detail`) VALUES
-(26, '2022127104638', '5', 'บะหมี่', '2', '100', ''),
-(27, '2022127104638', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '2', '80', ''),
-(28, '2022127104638', '6', 'ก๋วยจั๊บ', '3', '150', ''),
-(29, '2022127225614', '5', 'บะหมี่', '2', '100', ''),
-(30, '2022127225614', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '2', '80', ''),
-(31, '2022127225614', '6', 'ก๋วยจั๊บ', '3', '150', '');
+(1, '20221210235926', '2', 'ก๋วยเตี๋ยวเส้นเล็กหมูน้ำตก', '3', '120', 'ไม่เอาผัก'),
+(2, '20221210235926', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '5', '200', 'ไม่เอาลูกชิ้น'),
+(3, '202212111324', '2', 'ก๋วยเตี๋ยวเส้นเล็กหมูน้ำตก', '3', '120', 'ไม่เอาลูกชิ้น'),
+(4, '202212111324', '6', 'ก๋วยจั๊บ', '1', '50', 'ไม่เอาเลือด'),
+(5, '202212111324', '5', 'บะหมี่', '1', '50', ''),
+(6, '202212111324', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '3', '120', ''),
+(7, '202212111623', '2', 'ก๋วยเตี๋ยวเส้นเล็กหมูน้ำตก', '3', '120', 'ไม่เอาลูกชิ้น'),
+(8, '202212111623', '6', 'ก๋วยจั๊บ', '1', '50', 'ไม่เอาเลือด'),
+(9, '202212111623', '5', 'บะหมี่', '1', '50', ''),
+(10, '202212111623', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '3', '120', ''),
+(11, '202212111851', '2', 'ก๋วยเตี๋ยวเส้นเล็กหมูน้ำตก', '3', '120', 'ไม่เอาลูกชิ้น'),
+(12, '202212111851', '6', 'ก๋วยจั๊บ', '1', '50', 'ไม่เอาเลือด'),
+(13, '202212111851', '5', 'บะหมี่', '1', '50', ''),
+(14, '202212111851', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '3', '120', ''),
+(15, '2022121111126', '2', 'ก๋วยเตี๋ยวเส้นเล็กหมูน้ำตก', '3', '120', 'ไม่เอาลูกชิ้น'),
+(16, '2022121111126', '6', 'ก๋วยจั๊บ', '1', '50', 'ไม่เอาเลือด'),
+(17, '2022121111126', '5', 'บะหมี่', '1', '50', ''),
+(18, '2022121111126', '3', 'ก๋วยเตี๋ยวเส้นเล็กต้มยำหมู', '3', '120', '');
 
 -- --------------------------------------------------------
 
@@ -197,8 +223,11 @@ CREATE TABLE `tb_request` (
 --
 
 INSERT INTO `tb_request` (`request_id`, `user_id`, `address_id`, `rider_id`, `store_id`, `order_id`, `rider_lati`, `rider_longti`, `slip_img`, `status`, `date`, `time`) VALUES
-(12, '1', 1, '3', '1', '2022127104638', '13.7914', '100.62751', 'img_1670384798329.jpg', '7', '7/12/2022', '10:46:38'),
-(13, '1', 1, '', '1', '2022127225614', '', '', 'img_1670428574982.jpg', '3', '7/12/2022', '22:56:14');
+(1, '1', 1, '3', '1', '20221210235926', '13.7821', '100.6355', '', '6', '10/12/2022', '23:59:26'),
+(2, '1', 1, '', '1', '202212111324', '', '', '', '3', '11/12/2022', '1:3:24'),
+(3, '1', 1, '', '1', '202212111623', '', '', '', '1', '11/12/2022', '1:6:23'),
+(4, '1', 1, '', '1', '202212111851', '', '', '', '1', '11/12/2022', '1:8:51'),
+(5, '1', 1, '', '1', '2022121111126', '', '', '', '1', '11/12/2022', '1:11:26');
 
 -- --------------------------------------------------------
 
@@ -284,7 +313,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`user_id`, `user_name`, `pass_word`, `first_name`, `last_name`, `email`, `phone`, `user_image`, `status_id`) VALUES
-(1, 'user1', '123456', 'user1', 'user1', 'user1@gmail.com', '09999', 'img_1670415808870.jpg', 1),
+(1, 'user1', '123456', 'piyawat', 'sakdadet', 'user1@gmail.com', '09999', 'img_1670594358779.jpg', 1),
 (2, 'store1', '123456', 'store1', 'store1', 'store1@gmail.com', '09999999', 'img_1665154433457.jpg', 2),
 (3, 'rider1', '123456', 'rider1', 'rider1', 'rider1@gmail.com', '09999999', 'img_1668330407591.jpg', 3);
 
@@ -323,6 +352,12 @@ ALTER TABLE `tb_address`
 --
 ALTER TABLE `tb_buyer`
   ADD PRIMARY KEY (`buyer_id`);
+
+--
+-- Indexes for table `tb_cart`
+--
+ALTER TABLE `tb_cart`
+  ADD PRIMARY KEY (`cart_id`);
 
 --
 -- Indexes for table `tb_food`
@@ -401,6 +436,12 @@ ALTER TABLE `tb_buyer`
   MODIFY `buyer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `tb_cart`
+--
+ALTER TABLE `tb_cart`
+  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `tb_food`
 --
 ALTER TABLE `tb_food`
@@ -410,7 +451,7 @@ ALTER TABLE `tb_food`
 -- AUTO_INCREMENT for table `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tb_order_status`
@@ -428,7 +469,7 @@ ALTER TABLE `tb_otp_email`
 -- AUTO_INCREMENT for table `tb_request`
 --
 ALTER TABLE `tb_request`
-  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_request_success`
