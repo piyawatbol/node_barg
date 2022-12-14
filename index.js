@@ -77,27 +77,31 @@ app.use('/delete_menu',require("./router/menu/delete_menu"))
 app.use('/qrcode',require("./router/qrcode/qrcode"))
 
 //request
-app.use('/add_request_img',require("./router/request/add_request_img"))
-app.use('/add_request',require("./router/request/add_request"))
+app.use('/add_request_img',require("./router/request/user/add_request_img"))
+app.use('/add_request',require("./router/request/user/add_request"))
 app.use('/get_request',require("./router/request/get_request"))
-app.use('/get_request_single',require("./router/request/get_request_single"))
-app.use('/get_request_history',require("./router/request/get_request_history"))
+app.use('/get_request_single',require("./router/request/store/get_request_single"))
+app.use('/get_request_history',require("./router/request/store/get_request_history"))
 app.use('/update_request',require("./router/request/update_request"))
-app.use('/update_request_rider',require("./router/request/update_request_rider"))
-app.use('/request_success',require("./router/request/request_success"))
+app.use('/update_request_rider',require("./router/request/rider/update_request_rider"))
+app.use('/request_success',require("./router/request/rider/request_success"))
+app.use('/get_request_all',require("./router/request/user/get_request_all"))
+app.use('/get_request_id',require("./router/request/user/get_request_id"))
+app.use('/update_rider_location',require("./router/request/rider/update_rider_location"))
 
 //order
-app.use('/add_order',require('./router/request/add_order'))
+app.use('/add_order',require('./router/request/user/add_order'))
 app.use('/get_order',require("./router/request/get_order"))
 
 //cart
 app.use('/add_cart',require("./router/cart/add_cart"))
 app.use('/get_cart',require("./router/cart/get_cart"))
+app.use('/delete_cart',require("./router/cart/delete_cart"))
 
 
 //rider
-app.use('/get_request_rider',require("./router/request/get_request_rider"))
-app.use('/get_request_recived',require("./router/request/get_request_recived"))
+app.use('/get_request_rider',require("./router/request/rider/get_request_rider"))
+app.use('/get_request_recived',require("./router/request/rider/get_request_recived"))
 app.use('/get_request_one',require("./router/request/get_request_one"))
 
 
