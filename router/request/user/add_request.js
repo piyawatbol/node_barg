@@ -1,4 +1,5 @@
 const express = require("express");
+const { sum } = require("lodash");
 const router = express.Router();
 const mysql = require("mysql");
 
@@ -23,11 +24,14 @@ router.post("/", (req, res) => {
   const rider_longti = "";
   const img = '';
   const status = req.body.status;
+  const sum_price = req.body.sum_price;
+  const delivery_fee = req.body.delivery_fee;
+  const total = req.body.total;
   
   try {
     connection.query(
-      "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,slip_img,status,date,time) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-      [user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,img,status,date,time],
+      "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,slip_img,status,date,time,sum_price,delivery_fee,total) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      [user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,img,status,date,time,sum_price,delivery_fee,total],
       (err, results, fields) => {
         if (err) {
           console.log(err);

@@ -21,7 +21,6 @@ router.delete("/:user_id", async (req, res) => {
           console.log(err);
           return res.status(400).send();
         }
-
         return res.status(200).json("delete menu success");
       }
     );

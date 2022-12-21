@@ -1,0 +1,37 @@
+const express = require("express");
+const router = express.Router();
+const mysql = require("mysql");
+
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "bargfood",
+});
+
+router.get("/:user_id", async (req, res) => {
+  const user_id = req.params.user_id;
+  try {
+    connection.query(
+      "SELECT * FROM tb_favorite JOIN tb_store ON tb_favorite.store_id = tb_store.store_id WHERE tb_favorite.user_id = ?",
+      [user_id],
+      (err, results, fields) => {
+        if (err) {
+          console.log(err);
+          return res.status(400).send();
+        }
+        numRows = results.length;
+        if(numRows == 0){
+         return res.status(200).json([{"item": "not have favorite"}]);
+        }else{
+         return res.status(200).json(results);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send();
+  }
+});
+
+module.exports = router;

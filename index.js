@@ -1,8 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
-
-
 const bodyParser = require('body-parser')
 const _ = require('lodash')
 const cors = require('cors');
@@ -18,7 +16,7 @@ const port = 3000;
 app.listen(port, () => {
     console.log(`Sever start port ${port}`)
 })
-// Connect Database
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -36,6 +34,7 @@ connection.connect((err) => {
         return res.status(200).json("Connect Database")
     })
 })
+
 //login system
 app.use('/login', require("./router/login_system/login"));
 app.use('/check_duplicate', require("./router/login_system/register/check_duplicate"));
@@ -49,6 +48,7 @@ app.use('/reset_password',require("./router/forget_password/reset_password"));
 
 //store
 app.use('/get_all_store',require("./router/store/get_all_store"));
+app.use('/get_store_one',require("./router/store/get_store_one"));
 app.use('/get_store',require("./router/store/get_store"));
 app.use('/add_store',require("./router/store/add_store"));
 app.use('/get_store',require("./router/store/get_store"));
@@ -88,6 +88,7 @@ app.use('/request_success',require("./router/request/rider/request_success"))
 app.use('/get_request_all',require("./router/request/user/get_request_all"))
 app.use('/get_request_id',require("./router/request/user/get_request_id"))
 app.use('/update_rider_location',require("./router/request/rider/update_rider_location"))
+app.use('/get_success_img',require("./router/request/user/get_success_img"))
 
 //order
 app.use('/add_order',require('./router/request/user/add_order'))
@@ -96,7 +97,8 @@ app.use('/get_order',require("./router/request/get_order"))
 //cart
 app.use('/add_cart',require("./router/cart/add_cart"))
 app.use('/get_cart',require("./router/cart/get_cart"))
-app.use('/delete_cart',require("./router/cart/delete_cart"))
+app.use('/delete_cart_all',require("./router/cart/delete_cart_all"))
+app.use('/check_cart',require("./router/cart/check_cart"))
 
 
 //rider
@@ -104,23 +106,15 @@ app.use('/get_request_rider',require("./router/request/rider/get_request_rider")
 app.use('/get_request_recived',require("./router/request/rider/get_request_recived"))
 app.use('/get_request_one',require("./router/request/get_request_one"))
 
+//rate
+app.use('/add_rate_rider',require("./router/rate/add_rate_rider"))
+app.use('/add_rate_store',require("./router/rate/add_rate_store"))
+app.use('/check_rate_store',require("./router/rate/check_rate_store"))
+app.use('/sum_rate_store',require("./router/rate/sum_rate_store"))
+app.use('/get_rate_store',require("./router/rate/get_rate_store"))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//favorite
+app.use('/get_favorite',require("./router/favorite/get_favorite"))
+app.use('/check_favorite',require("./router/favorite/check_favorite"))
+app.use('/add_favorite',require("./router/favorite/add_favorite"))
+app.use('/delete_favorite',require("./router/favorite/delete_favorite"))

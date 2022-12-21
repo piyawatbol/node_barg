@@ -14,7 +14,7 @@ router.get("/:user_id", async (req, res) => {
 
   try {
     connection.query(
-      "SELECT * FROM tb_store WHERE user_id = ?",
+      "SELECT * FROM tb_store WHERE user_id = ? ORDER BY store_id DESC",
       [user_id],
       (err, results, fields) => {
         if (err) {

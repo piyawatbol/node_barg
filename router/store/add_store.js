@@ -37,10 +37,11 @@ router.post("/:user_id", upload.single("img"), (req, res) => {
     store_district,
     store_province,
     store_zipcode,
+    store_detail,
   } = req.body;
   try {
     connection.query(
-      "INSERT INTO tb_store(store_name,store_image,user_id,store_house_number,store_county,store_district,store_province,store_zipcode,store_lat,store_long) VALUES(?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tb_store(store_name,store_image,user_id,store_house_number,store_county,store_district,store_province,store_zipcode,store_detail,store_lat,store_long) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
       [
         store_name,
         store_image,
@@ -50,6 +51,7 @@ router.post("/:user_id", upload.single("img"), (req, res) => {
         store_district,
         store_province,
         store_zipcode,
+        store_detail,
         store_latitude,
         store_longtitude,
       ],

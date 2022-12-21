@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 
 router.post("/", async (req, res) => {
   const user_id = req.body.user_id;
-  const store_id = req.body.user_id;
+  const store_id = req.body.store_id;
   const food_id = req.body.food_id;
   const food_name = req.body.food_name;
   const amount = req.body.amount;
