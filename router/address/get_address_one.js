@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 
-router.get("/:user_id/:address_id", async (req, res) => {
+router.get("/:address_id", async (req, res) => {
   const user_id = req.params.user_id;
   const address_id = req.params.address_id;
   try {
