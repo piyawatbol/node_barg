@@ -4,6 +4,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const _ = require("lodash");
 const cors = require("cors");
+require("dotenv").config();
+
+const { DB_HOST, DB_USER, DB_PASS, DB_NAME } = process.env;
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,10 +31,10 @@ app.listen(port, () => {
 });
 
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "12345678",
-  database: "bargfood",
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASS,
+  database: DB_NAME,
 });
 
 connection.connect((err) => {
@@ -125,6 +129,7 @@ app.use("/delete_cart_all", require("./router/cart/delete_cart_all"));
 app.use("/check_cart", require("./router/cart/check_cart"));
 app.use("/get_cart_one", require("./router/cart/get_cart_one"));
 app.use("/edit_cart", require("./router/cart/edit_cart"));
+app.use("/delete_cart_one", require("./router/cart/delete_cart_one"));
 
 //rider
 app.use(
@@ -157,3 +162,4 @@ app.use("/edit_address", require("./router/address/edit_adress"));
 app.use("/change_status", require("./router/address/change_status"));
 app.use("/get_address_default", require("./router/address/get_address_default"));
 app.use("/delete_address", require("./router/address/delete_address"));
+app.use("/get_address_status", require("./router/address/get_address_status"));

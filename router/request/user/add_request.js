@@ -3,13 +3,15 @@ const { sum } = require("lodash");
 const router = express.Router();
 const mysql = require("mysql");
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "bargfood",
-});
+require("dotenv").config();
+const { DB_HOST, DB_USER, DB_PASS, DB_NAME } = process.env;
 
+const connection = mysql.createConnection({
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASS,
+  database: DB_NAME,
+});
 router.post("/", (req, res) => {
   var currentdate = new Date();
   const date = `${currentdate.getDate()}/${currentdate.getMonth() + 1}/${currentdate.getFullYear()}`;
