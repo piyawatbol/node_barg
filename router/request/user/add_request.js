@@ -14,7 +14,9 @@ const connection = mysql.createConnection({
 });
 router.post("/", (req, res) => {
   var currentdate = new Date();
-  const date = `${currentdate.getDate()}/${currentdate.getMonth() + 1}/${currentdate.getFullYear()}`;
+  const date = `${currentdate.getDate()}/${
+    currentdate.getMonth() + 1
+  }/${currentdate.getFullYear()}`;
   const time = `${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`;
 
   const user_id = req.body.user_id;
@@ -29,16 +31,33 @@ router.post("/", (req, res) => {
   const sum_price = req.body.sum_price;
   const delivery_fee = req.body.delivery_fee;
   const total = req.body.total;
-  const buyer_id =";"
-  if(buyer_name == "Wallet"){
-    buyer_id=1
-  }else if(buyer_name == "Pay On Delivery"){
-    buyer_id=2
+  const buyer_id = "";
+  if (buyer_name == "Wallet") {
+    buyer_id = 1;
+    return buyer_id;
+  } else if (buyer_name == "Pay On Delivery") {
+    buyer_id = 2;
+    return buyer_id;
   }
   try {
     connection.query(
       "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,buyer_id,status,date,time,sum_price,delivery_fee,total) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-      [user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,buyer_id,status,date,time,sum_price,delivery_fee,total],
+      [
+        user_id,
+        address_id,
+        rider_id,
+        store_id,
+        order_id,
+        rider_lati,
+        rider_longti,
+        buyer_id,
+        status,
+        date,
+        time,
+        sum_price,
+        delivery_fee,
+        total,
+      ],
       (err, results, fields) => {
         if (err) {
           console.log(err);
