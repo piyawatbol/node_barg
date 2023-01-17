@@ -109,6 +109,7 @@ app.use(
   "/update_request_rider",
   require("./router/request/rider/update_request_rider")
 );
+app.use("/get_rider_history", require("./router/request/rider/get_rider_history"));
 app.use("/request_success", require("./router/request/rider/request_success"));
 app.use("/get_request_all", require("./router/request/user/get_request_all"));
 app.use("/get_request_id", require("./router/request/user/get_request_id"));
