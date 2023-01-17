@@ -166,6 +166,9 @@ app.use("/get_address_status", require("./router/address/get_address_status"));
 app.use("/update_address_status", require("./router/address/update_address_status"));
 app.use("/get_address_one", require("./router/address/get_address_one"));
 
+//buyer
+app.use("/get_buyer", require("./router/buyer/get_buyer"));
+
 //wallet
 app.use("/register_wallet", require("./router/wallet/register_wallet"));
 app.use("/get_wallet", require("./router/wallet/get_wallet"));
