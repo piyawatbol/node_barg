@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
    const request_id = req.body.request_id;
    const status = req.body.status;
     try {
-        connection.query("UPDATE tb_request SET status = ? WHERE request_id = ?", [status,request_id], (err, results, fields) => {
+        connection.query("UPDATE tb_request SET order_status_id = ? WHERE request_id = ?", [status,request_id], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
