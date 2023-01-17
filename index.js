@@ -112,6 +112,7 @@ app.use(
 app.use("/request_success", require("./router/request/rider/request_success"));
 app.use("/get_request_all", require("./router/request/user/get_request_all"));
 app.use("/get_request_id", require("./router/request/user/get_request_id"));
+app.use("/get_request_one", require("./router/request/get_request_one"));
 app.use(
   "/update_rider_location",
   require("./router/request/rider/update_rider_location")
