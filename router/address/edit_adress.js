@@ -26,6 +26,57 @@ router.patch("/:user_id/:address_id", async (req, res) => {
     const latitude = req.body.latitude;
     const longtitude = req.body.longtitude;
     const address_status_id = req.body.address_status_id;
+    const address_default_id = req.body.address_default_id;
+
+    if(address_status_id == 1){
+        try {
+            connection.query(
+              "UPDATE tb_address SET address_status_id = '5' WHERE user_id =? AND address_id = ?",
+              [ user_id, address_default_id],
+              (err, results, fields) => {
+                if (err) {
+                  console.log(err);
+                  return res.status(400).send();
+                } else {
+                    try {
+                        connection.query("UPDATE tb_address SET name = ? , phone = ?, house_number = ?, county = ?, district  = ?, province  = ?, zip_code  = ?, address_detail  = ?, latitude  = ?, longtitude  = ?, address_status_id  = ? WHERE user_id =? AND address_id = ?",
+                         [name ,phone ,house_number ,county,district ,province ,zip_code ,address_detail ,latitude,longtitude,address_status_id,user_id ,address_id  ], (err, results, fields) => {
+                            if (err) {
+                                console.log(err);
+                                return res.status(400).send();
+                            }else{
+                                res.status(200).json("update address success");
+                            }
+                            
+                        })
+                    } catch (err) {
+                        console.log(err);
+                        return res.status(500).send();
+                    }
+                }
+              }
+            );
+          } catch (err) {
+            console.log(err);
+            return res.status(500).send();
+          }
+    }else{
+        try {
+            connection.query("UPDATE tb_address SET name = ? , phone = ?, house_number = ?, county = ?, district  = ?, province  = ?, zip_code  = ?, address_detail  = ?, latitude  = ?, longtitude  = ?, address_status_id  = ? WHERE user_id =? AND address_id = ?",
+             [name ,phone ,house_number ,county,district ,province ,zip_code ,address_detail ,latitude,longtitude,address_status_id,user_id ,address_id  ], (err, results, fields) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(400).send();
+                }else{
+                    res.status(200).json("update address success");
+                }
+                
+            })
+        } catch (err) {
+            console.log(err);
+            return res.status(500).send();
+        }
+    }
 
     try {
         connection.query("UPDATE tb_address SET name = ? , phone = ?, house_number = ?, county = ?, district  = ?, province  = ?, zip_code  = ?, address_detail  = ?, latitude  = ?, longtitude  = ?, address_status_id  = ? WHERE user_id =? AND address_id = ?",

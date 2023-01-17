@@ -25,23 +25,86 @@ router.post("/", async (req, res) => {
   const latitude = req.body.latitude;
   const longtitude = req.body.longtitude;
   const address_status_id = req.body.address_status_id;
-  
-  try {
-    connection.query(
-      "INSERT INTO tb_address(user_id,name,phone,house_number,county,district,province,zip_code,address_detail,latitude,longtitude,address_status_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
-      [user_id,name,phone,house_number,county,district,province,zip_code,address_detail,latitude,longtitude,address_status_id],
-      (err, results, fields) => {
-        if (err) {
-          console.log(err);
-          return res.status(400).send();
-        } else {
-          return res.status(200).json("Add to Address Success");
+  const address_default_id = req.body.address_default_id;
+
+  if (address_status_id == 1) {
+    try {
+      connection.query(
+        "UPDATE tb_address SET address_status_id = '5' WHERE user_id =? AND address_id = ?",
+        [user_id, address_default_id],
+        (err, results, fields) => {
+          if (err) {
+            console.log(err);
+            return res.status(400).send();
+          } else {
+            try {
+              connection.query(
+                "INSERT INTO tb_address(user_id,name,phone,house_number,county,district,province,zip_code,address_detail,latitude,longtitude,address_status_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+                [
+                  user_id,
+                  name,
+                  phone,
+                  house_number,
+                  county,
+                  district,
+                  province,
+                  zip_code,
+                  address_detail,
+                  latitude,
+                  longtitude,
+                  address_status_id,
+                ],
+                (err, results, fields) => {
+                  if (err) {
+                    console.log(err);
+                    return res.status(400).send();
+                  } else {
+                    return res.status(200).json("Add to Address Success");
+                  }
+                }
+              );
+            } catch (err) {
+              console.log(err);
+              return res.status(500).send();
+            }
+          }
         }
-      }
-    );
-  } catch (err) {
-    console.log(err);
-    return res.status(500).send();
+      );
+    } catch (err) {
+      console.log(err);
+      return res.status(500).send();
+    }
+  } else {
+    try {
+      connection.query(
+        "INSERT INTO tb_address(user_id,name,phone,house_number,county,district,province,zip_code,address_detail,latitude,longtitude,address_status_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        [
+          user_id,
+          name,
+          phone,
+          house_number,
+          county,
+          district,
+          province,
+          zip_code,
+          address_detail,
+          latitude,
+          longtitude,
+          address_status_id,
+        ],
+        (err, results, fields) => {
+          if (err) {
+            console.log(err);
+            return res.status(400).send();
+          } else {
+            return res.status(200).json("Add to Address Success");
+          }
+        }
+      );
+    } catch (err) {
+      console.log(err);
+      return res.status(500).send();
+    }
   }
 });
 

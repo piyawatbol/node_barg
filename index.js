@@ -163,3 +163,5 @@ app.use("/change_status", require("./router/address/change_status"));
 app.use("/get_address_default", require("./router/address/get_address_default"));
 app.use("/delete_address", require("./router/address/delete_address"));
 app.use("/get_address_status", require("./router/address/get_address_status"));
+app.use("/update_address_status", require("./router/address/update_address_status"));
+app.use("/get_address_one", require("./router/address/get_address_one"));
