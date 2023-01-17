@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
 
 router.get("/:user_id", async (req, res) => {
   const user_id = req.params.user_id;
-  const wallet_id = req.body.wallet_id;
+ 
   const wallet_amount = req.body.wallet_amount;
   const banking = req.body.banking;
   const wallet_status_id = req.body.wallet_status_id;
@@ -24,7 +24,7 @@ router.get("/:user_id", async (req, res) => {
   
   try {
     connection.query(
-      "SELECT wallet_total FROM tb_wallet WHERE user_id =?",
+      "SELECT * FROM tb_wallet WHERE user_id =?",
       [user_id],
 
       (err, results, fields) => {
@@ -33,6 +33,8 @@ router.get("/:user_id", async (req, res) => {
           return res.status(400).send();
         }
         const wallet = results[0]["wallet_total"];
+        const wallet_id = results[0]["wallet_id"];
+       
         const total = parseInt(wallet) + parseInt(wallet_amount);
         try {
           connection.query(
@@ -45,17 +47,16 @@ router.get("/:user_id", async (req, res) => {
               } else {
                 try {
                   connection.query(
-                    "INSERT INTO tb_wallet_history(user_id,wallet_total) VALUES(?,?)",
+                    "INSERT INTO tb_wallet_hitory(wallet_id,wallet_amount,banking,wallet_status_id,wallet_date,wallet_time) VALUES(?,?,?,?,?,?)",
                     [
-                      user_id,
-                      0
+                      wallet_id,wallet_amount,banking,wallet_status_id,wallet_date,wallet_time
                     ],
                     (err, results, fields) => {
                       if (err) {
                         console.log(err);
                         return res.status(400).send();
                       } else {
-                        return res.status(200).json("register wallet Success");
+                        return res.status(200).json("Top up wallet Success");
                       }
                     }
                   );

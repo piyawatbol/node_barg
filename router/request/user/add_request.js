@@ -24,13 +24,17 @@ router.post("/", (req, res) => {
   const order_id = req.body.order_id;
   const rider_lati = "";
   const rider_longti = "";
-  
-  const buyer_id = req.body.buyer_id;
+  const buyer_name = req.body.buyer_name;
   const status = req.body.status;
   const sum_price = req.body.sum_price;
   const delivery_fee = req.body.delivery_fee;
   const total = req.body.total;
-  
+  const buyer_id =";"
+  if(buyer_name == "Wallet"){
+    buyer_id=1
+  }else if(buyer_name == "Pay On Delivery"){
+    buyer_id=2
+  }
   try {
     connection.query(
       "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,buyer_id,status,date,time,sum_price,delivery_fee,total) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
