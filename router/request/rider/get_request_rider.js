@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 
   try {
     connection.query(
-      "SELECT * FROM tb_request LEFT JOIN tb_store ON tb_request.store_id = tb_store.store_id WHERE status = 3",
+      "SELECT * FROM tb_request LEFT JOIN tb_store ON tb_request.store_id = tb_store.store_id WHERE order_status_id = 3",
       [],
       (err, results, fields) => {
         if (err) {
