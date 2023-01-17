@@ -16,7 +16,7 @@ router.get("/:rider_id", async (req, res) => {
   const rider_id = req.params.rider_id;
   try {
     connection.query(
-      "SELECT * FROM tb_request LEFT JOIN tb_store ON tb_request.store_id = tb_store.store_id JOIN tb_buyer ON tb_request.buyer_id = tb_buyer.buyer_id WHERE order_status_id = 4 OR order_status_id = 6",
+      "SELECT * FROM tb_request LEFT JOIN tb_store ON tb_request.store_id = tb_store.store_id JOIN tb_buyer ON tb_request.buyer_id = tb_buyer.buyer_id JOIN tb_order_status ON tb_requrest.order_status_id = tb_order_status.order_status_id WHERE order_status_id = 4 OR order_status_id = 6",
       [rider_id],
       (err, results, fields) => {
         if (err) {
