@@ -14,13 +14,11 @@ const connection = mysql.createConnection({
 
 
 router.get("/:address_id", async (req, res) => {
-  const user_id = req.params.user_id;
   const address_id = req.params.address_id;
   try {
-   
     connection.query(
-      "SELECT * FROM tb_address JOIN tb_address_status ON tb_address.address_status_id = tb_address_status.address_status_id WHERE tb_address.user_id=? AND tb_address.address_id=?",
-      [user_id,address_id],
+      "SELECT * FROM tb_address JOIN tb_address_status ON tb_address.address_status_id = tb_address_status.address_status_id WHERE  tb_address.address_id=?",
+      [address_id],
       (err, results, fields) => {
         if (err) {
           console.log(err);
