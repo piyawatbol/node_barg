@@ -31,13 +31,13 @@ router.post("/", (req, res) => {
   const sum_price = req.body.sum_price;
   const delivery_fee = req.body.delivery_fee;
   const total = req.body.total;
-  const buyer_id = "";
+  let buyer_id = "";
   if (buyer_name == "Wallet") {
     buyer_id = 1;
-    return buyer_id;
+    
   } else if (buyer_name == "Pay On Delivery") {
     buyer_id = 2;
-    return buyer_id;
+  
   }
   try {
     connection.query(
