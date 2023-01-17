@@ -93,7 +93,7 @@ app.use("/delete_menu", require("./router/menu/delete_menu"));
 app.use("/qrcode", require("./router/qrcode/qrcode"));
 
 //request
-app.use("/add_request_img", require("./router/request/user/add_request_img"));
+
 app.use("/add_request", require("./router/request/user/add_request"));
 app.use("/get_request", require("./router/request/get_request"));
 app.use(
@@ -165,3 +165,8 @@ app.use("/delete_address", require("./router/address/delete_address"));
 app.use("/get_address_status", require("./router/address/get_address_status"));
 app.use("/update_address_status", require("./router/address/update_address_status"));
 app.use("/get_address_one", require("./router/address/get_address_one"));
+
+//wallet
+app.use("/register_wallet", require("./router/wallet/register_wallet"));
+app.use("/get_wallet", require("./router/wallet/get_wallet"));
+app.use("/topup_wallet", require("./router/wallet/topup_wallet"));

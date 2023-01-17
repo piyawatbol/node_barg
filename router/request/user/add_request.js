@@ -24,7 +24,8 @@ router.post("/", (req, res) => {
   const order_id = req.body.order_id;
   const rider_lati = "";
   const rider_longti = "";
-  const img = '';
+  
+  const buyer_id = req.body.buyer_id;
   const status = req.body.status;
   const sum_price = req.body.sum_price;
   const delivery_fee = req.body.delivery_fee;
@@ -32,8 +33,8 @@ router.post("/", (req, res) => {
   
   try {
     connection.query(
-      "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,slip_img,status,date,time,sum_price,delivery_fee,total) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-      [user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,img,status,date,time,sum_price,delivery_fee,total],
+      "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,buyer_id,status,date,time,sum_price,delivery_fee,total) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      [user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,buyer_id,status,date,time,sum_price,delivery_fee,total],
       (err, results, fields) => {
         if (err) {
           console.log(err);
