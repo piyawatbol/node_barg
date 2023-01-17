@@ -12,9 +12,9 @@ const connection = mysql.createConnection({
   database: DB_NAME,
 });
 
-router.patch("/:user_id/:address_id", async (req, res) => {
+router.patch("/address_id", async (req, res) => {
   const address_id = req.params.address_id;
-  const user_id = req.params.user_id;
+//   const user_id = req.params.user_id;
   const address_status_id = req.body.address_status_id;
   const address_default_id = req.body.address_default_id;
   const address_default_status = req.body.address_default_status;
@@ -22,8 +22,8 @@ router.patch("/:user_id/:address_id", async (req, res) => {
   if (address_status_id == 1) {
     try {
       connection.query(
-        "UPDATE tb_address SET address_status_id = ? WHERE user_id =? AND address_id = ?",
-        [address_default_status, user_id, address_default_id],
+        "UPDATE tb_address SET address_status_id = ? WHERE address_id = ?",
+        [address_default_status,  address_default_id],
         (err, results, fields) => {
           if (err) {
             console.log(err);
@@ -31,8 +31,8 @@ router.patch("/:user_id/:address_id", async (req, res) => {
           } else {
             try {
               connection.query(
-                "UPDATE tb_address SET address_status_id = ? WHERE user_id =? AND address_id = ?",
-                [address_status_id, user_id, address_id],
+                "UPDATE tb_address SET address_status_id = ? WHERE  address_id = ?",
+                [address_status_id, address_id],
                 (err, results, fields) => {
                   if (err) {
                     console.log(err);
@@ -56,8 +56,8 @@ router.patch("/:user_id/:address_id", async (req, res) => {
   } else {
     try {
       connection.query(
-        "UPDATE tb_address SET address_status_id = ? WHERE user_id =? AND address_id = ?",
-        [address_status_id, user_id, address_id],
+        "UPDATE tb_address SET address_status_id = ? WHERE  address_id = ?",
+        [address_status_id,address_id],
         (err, results, fields) => {
           if (err) {
             console.log(err);

@@ -12,9 +12,8 @@ const connection = mysql.createConnection({
   database: DB_NAME,
 });
 
-router.patch("/:user_id/:address_id", async (req, res) => {
+router.patch("/:address_id", async (req, res) => {
     const address_id = req.params.address_id;
-    const user_id = req.params.user_id;
     const name = req.body.name;
     const phone = req.body.phone;
     const house_number = req.body.house_number;
@@ -31,16 +30,16 @@ router.patch("/:user_id/:address_id", async (req, res) => {
     if(address_status_id == 1){
         try {
             connection.query(
-              "UPDATE tb_address SET address_status_id = '5' WHERE user_id =? AND address_id = ?",
-              [ user_id, address_default_id],
+              "UPDATE tb_address SET address_status_id = '5' WHERE address_id = ?",
+              [  address_default_id],
               (err, results, fields) => {
                 if (err) {
                   console.log(err);
                   return res.status(400).send();
                 } else {
                     try {
-                        connection.query("UPDATE tb_address SET name = ? , phone = ?, house_number = ?, county = ?, district  = ?, province  = ?, zip_code  = ?, address_detail  = ?, latitude  = ?, longtitude  = ?, address_status_id  = ? WHERE user_id =? AND address_id = ?",
-                         [name ,phone ,house_number ,county,district ,province ,zip_code ,address_detail ,latitude,longtitude,address_status_id,user_id ,address_id  ], (err, results, fields) => {
+                        connection.query("UPDATE tb_address SET name = ? , phone = ?, house_number = ?, county = ?, district  = ?, province  = ?, zip_code  = ?, address_detail  = ?, latitude  = ?, longtitude  = ?, address_status_id  = ? WHERE  address_id = ?",
+                         [name ,phone ,house_number ,county,district ,province ,zip_code ,address_detail ,latitude,longtitude,address_status_id ,address_id  ], (err, results, fields) => {
                             if (err) {
                                 console.log(err);
                                 return res.status(400).send();
@@ -62,8 +61,8 @@ router.patch("/:user_id/:address_id", async (req, res) => {
           }
     }else{
         try {
-            connection.query("UPDATE tb_address SET name = ? , phone = ?, house_number = ?, county = ?, district  = ?, province  = ?, zip_code  = ?, address_detail  = ?, latitude  = ?, longtitude  = ?, address_status_id  = ? WHERE user_id =? AND address_id = ?",
-             [name ,phone ,house_number ,county,district ,province ,zip_code ,address_detail ,latitude,longtitude,address_status_id,user_id ,address_id  ], (err, results, fields) => {
+            connection.query("UPDATE tb_address SET name = ? , phone = ?, house_number = ?, county = ?, district  = ?, province  = ?, zip_code  = ?, address_detail  = ?, latitude  = ?, longtitude  = ?, address_status_id  = ? WHERE address_id = ?",
+             [name ,phone ,house_number ,county,district ,province ,zip_code ,address_detail ,latitude,longtitude,address_status_id,address_id  ], (err, results, fields) => {
                 if (err) {
                     console.log(err);
                     return res.status(400).send();
@@ -77,22 +76,6 @@ router.patch("/:user_id/:address_id", async (req, res) => {
             return res.status(500).send();
         }
     }
-
-    try {
-        connection.query("UPDATE tb_address SET name = ? , phone = ?, house_number = ?, county = ?, district  = ?, province  = ?, zip_code  = ?, address_detail  = ?, latitude  = ?, longtitude  = ?, address_status_id  = ? WHERE user_id =? AND address_id = ?",
-         [name ,phone ,house_number ,county,district ,province ,zip_code ,address_detail ,latitude,longtitude,address_status_id,user_id ,address_id  ], (err, results, fields) => {
-            if (err) {
-                console.log(err);
-                return res.status(400).send();
-            }else{
-                res.status(200).json("update address success");
-            }
-            
-        })
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send();
-    }
-})
+});
 
 module.exports = router;

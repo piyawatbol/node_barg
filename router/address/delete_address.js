@@ -13,13 +13,13 @@ const connection = mysql.createConnection({
   database: DB_NAME,
 });
 
-router.delete("/:user_id/:address_id", async (req, res) => {
-  const user_id = req.params.user_id;
+router.delete("/:address_id", async (req, res) => {
+  // const user_id = req.params.user_id;
   const address_id = req.params.address_id;
   try {
     connection.query(
-      "DELETE FROM tb_address WHERE user_id = ? AND address_id =?",
-      [user_id,address_id],
+      "DELETE FROM tb_address WHERE  address_id =?",
+      [address_id],
       (err, results, fields) => {
         if (err) {
           console.log(err);

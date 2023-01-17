@@ -12,15 +12,15 @@ const connection = mysql.createConnection({
   database: DB_NAME,
 });
 
-router.patch("/:user_id/:address_id", async (req, res) => {
+router.patch("/:address_id", async (req, res) => {
   const address_id = req.params.address_id;
-  const user_id = req.params.user_id;
+  // const user_id = req.params.user_id;
   const address_status_id = req.body.address_status_id;
 
   try {
     connection.query(
-      "UPDATE tb_address SET address_status_id = ? WHERE user_id =? AND address_id = ?",
-      [address_status_id, user_id, address_id],
+      "UPDATE tb_address SET address_status_id = ? WHERE  address_id = ?",
+      [address_status_id,  address_id],
       (err, results, fields) => {
         if (err) {
           console.log(err);
