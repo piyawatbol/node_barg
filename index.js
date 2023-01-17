@@ -93,7 +93,7 @@ app.use("/delete_menu", require("./router/menu/delete_menu"));
 app.use("/qrcode", require("./router/qrcode/qrcode"));
 
 //request
-app.use("/get_request_confrim", require("./router/request/store/get_request_confrim"))
+app.use("/get_request_confirm", require("./router/request/store/get_request_confirm"))
 app.use("/add_request", require("./router/request/user/add_request"));
 app.use("/get_request", require("./router/request/get_request"));
 app.use(

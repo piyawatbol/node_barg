@@ -17,7 +17,7 @@ router.get("/:store_id/:status", async (req, res) => {
   const status = req.params.status
   try {
     connection.query(
-      "SELECT * FROM tb_request WHERE store_id = ? AND status = ?",
+      "SELECT * FROM tb_request WHERE store_id = ? AND order_status_id = ?",
       [store_id,status],
       (err, results, fields) => {
         if (err) {
