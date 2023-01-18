@@ -19,7 +19,7 @@ router.patch("/:user_id", async (req, res) => {
   const wallet_amount = req.body.wallet_amount;
   const wallet_total = req.body.wallet_total;
   const banking = "wallet";
-  const wallet_status_id = 2;
+  const wallet_status_id = 3;
   const wallet_date = moment().format("l");
   const wallet_time = moment().format("LTS");
 
