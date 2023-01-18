@@ -18,52 +18,58 @@ router.patch("/:user_id", async (req, res) => {
   const wallet_id = req.body.wallet_id;
   const wallet_amount = req.body.wallet_amount;
   const banking = req.body.banking;
+  const wallet_total = req.body.wallet_total;
   const wallet_status_id = 2;
   const wallet_date = moment().format("l");
   const wallet_time = moment().format("LTS");
 
-  try {
-    connection.query(
-      "UPDATE tb_wallet SET wallet_total = wallet_total -" +
-        wallet_amount +
-        " WHERE user_id = ?",
-      [user_id],
-      (err, results, fields) => {
-        if (err) {
-          console.log(err);
-          return res.status(400).send();
-        } else {
-          try {
-            connection.query(
-              "INSERT INTO tb_wallet_hitory(wallet_id,wallet_amount,banking,wallet_status_id,wallet_date,wallet_time) VALUES(?,?,?,?,?,?)",
-              [
-                wallet_id,
-                wallet_amount,
-                banking,
-                wallet_status_id,
-                wallet_date,
-                wallet_time,
-              ],
-              (err, results, fields) => {
-                if (err) {
-                  console.log(err);
-                  return res.status(400).send();
-                } else {
-                  return res.status(200).json("Withdraw money wallet Success");
-                }
+  if(wallet_amount > wallet_total){
+        return res.send("not enough money ")
+  }else {
+    try {
+        connection.query(
+          "UPDATE tb_wallet SET wallet_total = wallet_total -" +
+            wallet_amount +
+            " WHERE user_id = ?",
+          [user_id],
+          (err, results, fields) => {
+            if (err) {
+              console.log(err);
+              return res.status(400).send();
+            } else {
+              try {
+                connection.query(
+                  "INSERT INTO tb_wallet_hitory(wallet_id,wallet_amount,banking,wallet_status_id,wallet_date,wallet_time) VALUES(?,?,?,?,?,?)",
+                  [
+                    wallet_id,
+                    wallet_amount,
+                    banking,
+                    wallet_status_id,
+                    wallet_date,
+                    wallet_time,
+                  ],
+                  (err, results, fields) => {
+                    if (err) {
+                      console.log(err);
+                      return res.status(400).send();
+                    } else {
+                      return res.status(200).json("Withdraw money wallet Success");
+                    }
+                  }
+                );
+              } catch (err) {
+                console.log(err);
+                return res.status(500).send();
               }
-            );
-          } catch (err) {
-            console.log(err);
-            return res.status(500).send();
+            }
           }
-        }
+        );
+      } catch (err) {
+        console.log(err);
+        return res.status(500).send();
       }
-    );
-  } catch (err) {
-    console.log(err);
-    return res.status(500).send();
   }
+  
 });
 
 module.exports = router;

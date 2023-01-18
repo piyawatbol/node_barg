@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
           console.log(err);
           return res.status(400).send();
         } else {
-          return res.status(200).json("register success");
+          return res.send({user_id: results.insertId});
         }
       }
     );
