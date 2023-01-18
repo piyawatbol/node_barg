@@ -70,7 +70,7 @@ router.patch("/:user_id", async (req, res) => {
             return res.status(500).send();
           }
   }else {
-    return res.status(201).json("The amount in the wallet is insufficient")
+    return res.status(200).json("The amount in the wallet is insufficient")
   }
   
 });
