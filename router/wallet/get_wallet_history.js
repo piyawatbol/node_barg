@@ -16,7 +16,7 @@ router.get("/:user_id", async (req, res) => {
     const user_id = req.params.user_id;
   try {
     connection.query(
-      "SELECT * FROM tb_wallet  JOIN tb_wallet_hitory ON tb_wallet.wallet_id = tb_wallet_hitory.wallet_id WHERE tb_wallet.user_id =?",[user_id],
+      "SELECT * FROM tb_wallet  JOIN tb_wallet_hitory ON tb_wallet.wallet_id = tb_wallet_hitory.wallet_id JOIN tb_wallet_status ON tb_wallet_hitory.wallet_status_id = tb_wallet_status.wallet_status_id WHERE tb_wallet.user_id =?",[user_id],
 
       (err, results, fields) => {
         if (err) {
