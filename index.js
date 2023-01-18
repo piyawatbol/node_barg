@@ -175,3 +175,7 @@ app.use("/get_buyer", require("./router/buyer/get_buyer"));
 app.use("/register_wallet", require("./router/wallet/register_wallet"));
 app.use("/get_wallet", require("./router/wallet/get_wallet"));
 app.use("/topup_wallet", require("./router/wallet/topup_wallet"));
+app.use("/sub_wallet", require("./router/wallet/sub_wallet"));
+app.use("/pay_wallet", require("./router/wallet/pay_wallet"));
+app.use("/get_wallet_history", require("./router/wallet/get_wallet_history"));
+app.use("/get_wallet_history_all", require("./router/wallet/get_wallet_history_all"));

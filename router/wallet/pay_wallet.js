@@ -17,14 +17,14 @@ router.patch("/:user_id", async (req, res) => {
   const user_id = req.params.user_id;
   const wallet_id = req.body.wallet_id;
   const wallet_amount = req.body.wallet_amount;
-  const banking = req.body.banking;
-  const wallet_status_id = 1;
+  const banking = "wallet";
+  const wallet_status_id = 2;
   const wallet_date = moment().format("l");
   const wallet_time = moment().format("LTS");
 
   try {
     connection.query(
-      "UPDATE tb_wallet SET wallet_total = wallet_total +" +
+      "UPDATE tb_wallet SET wallet_total = wallet_total -" +
         wallet_amount +
         " WHERE user_id = ?",
       [user_id],
@@ -49,7 +49,7 @@ router.patch("/:user_id", async (req, res) => {
                   console.log(err);
                   return res.status(400).send();
                 } else {
-                  return res.status(200).json("Top up wallet Success");
+                  return res.status(200).json("pay wallet Success");
                 }
               }
             );
