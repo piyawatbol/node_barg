@@ -24,7 +24,7 @@ router.patch("/:user_id", async (req, res) => {
   const wallet_time = moment().format("LTS");
 
   if(wallet_amount > wallet_total){
-        return res.send("not enough money ")
+        return res.status(200).json("The amount in the wallet is insufficient")
   }else {
     try {
         connection.query(
