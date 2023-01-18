@@ -41,7 +41,7 @@ router.post("/", (req, res) => {
   }
   try {
     connection.query(
-      "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,buyer_id,status,date,time,sum_price,delivery_fee,total) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tb_request(user_id,address_id,rider_id,store_id,order_id,rider_lati,rider_longti,buyer_id,order_status_id,date,time,sum_price,delivery_fee,total) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         user_id,
         address_id,

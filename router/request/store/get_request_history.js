@@ -16,14 +16,14 @@ router.get("/:store_id", async (req, res) => {
   const store_id = req.params.store_id;
   try {
     connection.query(
-      "SELECT * FROM tb_request JOIN tb_order_status ON tb_request.status = tb_order_status.order_status_id WHERE store_id = ? AND order_status_id = 6 OR order_status_id = 7",
+      "SELECT * FROM tb_request JOIN tb_buyer ON tb_request.buyer_id = tb_buyer.buyer_id LEFT JOIN tb_order_status ON tb_request.order_status_id = tb_order_status.order_status_id WHERE tb_request.store_id = ? AND tb_request.order_status_id = 6 OR tb_request.order_status_id = 7",
       [store_id],
       (err, results, fields) => {
         if (err) {
           console.log(err);
           return res.status(400).send();
         }
-        res.status(202).json(results);
+       res.status(202).json(results);
       }
     );
   } catch (err) {
