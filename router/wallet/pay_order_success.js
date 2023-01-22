@@ -37,7 +37,6 @@ const get_order = async (request_id, res) => {
   }
 };
 
-
 const pay_wallet_store = async () => {
   try {
     connection.query(
@@ -90,7 +89,6 @@ router.post("/:request_id", async (req, res) => {
   const wallet_date = moment().format("l");
   const wallet_time = moment().format("LTS");
 
- 
   try {
     connection.query(
       "SELECT * FROM tb_request  LEFT JOIN tb_wallet_store ON tb_request.store_id = tb_wallet_store.store_id JOIN tb_wallet ON tb_request.rider_id = tb_wallet.user_id WHERE tb_request.request_id =?",
@@ -106,15 +104,16 @@ router.post("/:request_id", async (req, res) => {
           let wallet_store_id = results[0].wallet_store_id;
           let wallet_rider_amount = results[0].delivery_fee;
           let sum = results[0].sum_price;
-          let wallet_amount = sum * 0.3;
+          let sum_total = sum - sum * 0.3;
+          let wallet_amount = sum_total;
           let buyer_id = results[0].buyer_id;
 
-          if(buyer_id == 1){
+          if (buyer_id == 1) {
             try {
               //rider
               connection.query(
                 "UPDATE tb_wallet SET wallet_total = wallet_total +" +
-                wallet_rider_amount +
+                  wallet_rider_amount +
                   " WHERE wallet_id = ?",
                 [wallet_id],
                 (err, results, fields) => {
@@ -139,11 +138,11 @@ router.post("/:request_id", async (req, res) => {
                             return res.status(400).send();
                           } else {
                             // wallet store
-  
+
                             try {
                               connection.query(
                                 "UPDATE tb_wallet_store SET wallet_store_total = wallet_store_total +" +
-                                wallet_amount +
+                                  wallet_amount +
                                   " WHERE wallet_store_id  = ?",
                                 [wallet_store_id],
                                 (err, results, fields) => {
@@ -198,11 +197,11 @@ router.post("/:request_id", async (req, res) => {
               console.log(err);
               return res.status(500).send();
             }
-          }else{
+          } else {
             try {
               connection.query(
                 "UPDATE tb_wallet_store SET wallet_store_total = wallet_store_total +" +
-                wallet_amount +
+                  wallet_amount +
                   " WHERE wallet_store_id  = ?",
                 [wallet_store_id],
                 (err, results, fields) => {
@@ -226,9 +225,7 @@ router.post("/:request_id", async (req, res) => {
                             console.log(err);
                             return res.status(400).send();
                           } else {
-                            return res
-                              .status(200)
-                              .json("Order Success");
+                            return res.status(200).json("Order Success");
                           }
                         }
                       );
@@ -244,12 +241,9 @@ router.post("/:request_id", async (req, res) => {
               return res.status(500).send();
             }
           }
-
-          
-          
-         }
-       }
-     );
+        }
+      }
+    );
   } catch (err) {
     console.log(err);
     return res.status(500).send();
