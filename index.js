@@ -96,19 +96,10 @@ app.use("/qrcode", require("./router/qrcode/qrcode"));
 app.use("/get_request_confirm", require("./router/request/store/get_request_confirm"))
 app.use("/add_request", require("./router/request/user/add_request"));
 app.use("/get_request", require("./router/request/get_request"));
-app.use(
-  "/get_request_single",
-  require("./router/request/store/get_request_single")
-);
-app.use(
-  "/get_request_history",
-  require("./router/request/store/get_request_history")
-);
+app.use("/get_request_single", require("./router/request/store/get_request_single"));
+app.use("/get_request_history", require("./router/request/store/get_request_history"));
 app.use("/update_request", require("./router/request/update_request"));
-app.use(
-  "/update_request_rider",
-  require("./router/request/rider/update_request_rider")
-);
+app.use("/update_request_rider", require("./router/request/rider/update_request_rider"));
 app.use("/get_rider_history", require("./router/request/rider/get_rider_history"));
 app.use("/request_success", require("./router/request/rider/request_success"));
 app.use("/get_request_all", require("./router/request/user/get_request_all"));
@@ -179,3 +170,12 @@ app.use("/sub_wallet", require("./router/wallet/sub_wallet"));
 app.use("/pay_wallet", require("./router/wallet/pay_wallet"));
 app.use("/get_wallet_history", require("./router/wallet/get_wallet_history"));
 app.use("/get_wallet_history_all", require("./router/wallet/get_wallet_history_all"));
+
+//wallet store
+app.use("/register_store_wallet", require("./router/wallet/register_store_wallet"));
+app.use("/sub_wallet_store", require("./router/wallet/sub_store_wallet"));
+app.use("/get_wallet_store_history", require("./router/wallet/get_wallet_history_store"));
+
+//pay_order_success
+app.use("/pay_order_success", require("./router/wallet/pay_order_success"));
+
