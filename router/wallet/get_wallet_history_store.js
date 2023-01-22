@@ -25,7 +25,7 @@ router.get("/:store_id", async (req, res) => {
         }
         numRows = results.length;
         if (numRows == 0) {
-          return res.status(200).json([]);
+          return res.status(200).json("don't history");
         } else {
           return res.status(200).json(results);
         }
