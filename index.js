@@ -175,6 +175,7 @@ app.use("/get_wallet_history_all", require("./router/wallet/get_wallet_history_a
 app.use("/register_store_wallet", require("./router/wallet/register_store_wallet"));
 app.use("/sub_wallet_store", require("./router/wallet/sub_store_wallet"));
 app.use("/get_wallet_store_history", require("./router/wallet/get_wallet_history_store"));
+app.use("/get_wallet_store", require("./router/wallet/get_wallet_store"));
 
 //pay_order_success
 app.use("/pay_order_success", require("./router/wallet/pay_order_success"));
