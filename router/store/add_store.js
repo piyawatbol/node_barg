@@ -63,7 +63,7 @@ router.post("/:user_id", upload.single("img"), (req, res) => {
           console.log(err);
           return res.status(400).send();
         }
-        return res.status(200).json({user_id:results.insertId});
+        return res.status(200).json([{store_id:results.insertId}]);
       }
     );
   } catch (err) {
