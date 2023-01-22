@@ -24,13 +24,10 @@ router.get("/:user_id", async (req, res) => {
         if (err) {
           console.log(err);
           return res.status(400).send();
-        }
-        numRows = results.length;
-        if (numRows == 0) {
-          return res.status(200).json([{ item: "not have cart" }]);
-        } else {
+        }else{
           return res.status(200).json(results);
         }
+        
       }
     );
   } catch (err) {
