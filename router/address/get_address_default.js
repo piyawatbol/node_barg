@@ -25,7 +25,7 @@ router.get("/:user_id", async (req, res) => {
         }
         numRows = results.length;
         if (numRows == 0) {
-          return res.status(200).json([{ item: "not have cart" }]);
+          return res.status(200).json([{ item: "not have address" }]);
         } else {
           return res.status(200).json(results);
         }
