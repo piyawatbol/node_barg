@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
           console.log(err);
           return res.status(400).send();
         } else {
-          return res.send({user_id: results.insertId});
+          return res.send(200).json(results.insertId);
         }
       }
     );

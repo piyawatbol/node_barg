@@ -102,7 +102,7 @@ router.post("/:request_id", async (req, res) => {
           // return res.status(200).json(results);
           let wallet_id = results[0].wallet_id;
           let wallet_store_id = results[0].wallet_store_id;
-          let wallet_rider_amount = results[0].delivery_fee;
+          let wallet_rider_amount = results[0].delivery_fee  ;
           let sum = results[0].sum_price;
           let sum_total = sum - sum * 0.3;
           let wallet_amount = sum_total;
