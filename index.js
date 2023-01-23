@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const _ = require("lodash");
 const cors = require("cors");
+const { request } = require("express");
 require("dotenv").config();
 
 const { DB_HOST, DB_USER, DB_PASS, DB_NAME } = process.env;
@@ -71,6 +72,7 @@ app.use("/get_store", require("./router/store/get_store"));
 app.use("/edit_store", require("./router/store/edit_store"));
 app.use("/edit_img_store", require("./router/store/edit_img_store"));
 app.use("/update_location", require("./router/store/update_location"));
+app.use("/cancel_order", require("./router/request/store/cancel_order"));
 
 //user
 app.use("/get_user", require("./router/user/get_user"));
@@ -105,10 +107,7 @@ app.use("/request_success", require("./router/request/rider/request_success"));
 app.use("/get_request_all", require("./router/request/user/get_request_all"));
 app.use("/get_request_id", require("./router/request/user/get_request_id"));
 app.use("/get_request_one", require("./router/request/get_request_one"));
-app.use(
-  "/update_rider_location",
-  require("./router/request/rider/update_rider_location")
-);
+app.use("/update_rider_location", require("./router/request/rider/update_rider_location"));
 app.use("/get_success_img", require("./router/request/user/get_success_img"));
 
 //order
@@ -125,14 +124,8 @@ app.use("/edit_cart", require("./router/cart/edit_cart"));
 app.use("/delete_cart_one", require("./router/cart/delete_cart_one"));
 
 //rider
-app.use(
-  "/get_request_rider",
-  require("./router/request/rider/get_request_rider")
-);
-app.use(
-  "/get_request_recived",
-  require("./router/request/rider/get_request_recived")
-);
+app.use("/get_request_rider", require("./router/request/rider/get_request_rider"));
+app.use("/get_request_recived", require("./router/request/rider/get_request_recived"));
 app.use("/get_request_one", require("./router/request/get_request_one"));
 
 //rate
@@ -179,4 +172,8 @@ app.use("/get_wallet_store", require("./router/wallet/get_wallet_store"));
 
 //pay_order_success
 app.use("/pay_order_success", require("./router/wallet/pay_order_success"));
+
+//search
+app.use("/search_menu", require("./router/search/search_menu"));
+app.use("/search_store", require("./router/search/search_store"));
 
