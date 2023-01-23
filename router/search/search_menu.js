@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 router.get("/", async (req, res) => {
-    const data = req.body.data;
+    const data = req.params.data;
   try {
     connection.query(
       "SELECT * FROM tb_food WHERE food_name LIKE '%"+data+"%'",
