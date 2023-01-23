@@ -12,8 +12,8 @@ const connection = mysql.createConnection({
   database: DB_NAME,
 });
 
-router.get("/", async (req, res) => {
-    const data = req.params.data;
+router.post("/", async (req, res) => {
+    const data = req.body.data;
   try {
     connection.query(
       "SELECT * FROM tb_store WHERE store_name LIKE '%"+data+"%'",
