@@ -15,26 +15,31 @@ const connection = mysql.createConnection({
 router.post("/:store_id", async (req, res) => {
     const store_id = req.params.store_id;
     const data = req.body.data;
-  try {
-    connection.query(
-      "SELECT * FROM tb_food WHERE food_name LIKE '%"+data+"%' AND store_id=?",[store_id],
-      (err, results, fields) => {
-        if (err) {
-          console.log(err);
-          return res.status(400).send();
-        }
-        numRows = results.length;
-        if(numRows == 0){
-         return res.status(200).json([{"item": "not have menu"}]);
-        }else{
-          return res.status(200).json(results);
-        }
+    if(data != []){
+      try {
+        connection.query(
+          "SELECT * FROM tb_food WHERE food_name LIKE '%"+data+"%' AND store_id=?",[store_id],
+          (err, results, fields) => {
+            if (err) {
+              console.log(err);
+              return res.status(400).send();
+            }
+            numRows = results.length;
+            if(numRows == 0){
+             return res.status(200).json([{"item": "not have menu"}]);
+            }else{
+              return res.status(200).json(results);
+            }
+          }
+        );
+      } catch (err) {
+        console.log(err);
+        return res.status(500).send();
       }
-    );
-  } catch (err) {
-    console.log(err);
-    return res.status(500).send();
-  }
+    }else{
+      return res.status(200).json([]);
+    }
+  
 });
 
 module.exports = router;
